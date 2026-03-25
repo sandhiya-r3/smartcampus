@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>LearnX- Smart Campus</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link rel="stylesheet" href="css/sub2.css">
+</head>
+
+<body>
+
+    <!-- 🔗 NAVBAR -->
+<nav class="navbar navbar-expand-lg sticky-top">
+  <div class="container">
+
+    <button class="navbar-toggler bg-light" data-bs-toggle="collapse" data-bs-target="#navMenu">☰</button>
+
+    <div class="collapse navbar-collapse justify-content-center" id="navMenu">
+      <ul class="navbar-nav">
+
+        <li class="nav-item"><a class="nav-link" href="home.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="sub.html">Course Portal</a></li>
+         <li class="nav-item"><a class="nav-link" href="works.html">Workspace</a></li>
+        <li class="nav-item"><a class="nav-link" href="activity.html">Student Activity</a></li>
+
+        
+
+        <li class="nav-item">
+          <button class="toggle-btn" onclick="toggleDark()">🌙</button>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+    <ul class="navbar-nav mx-auto">
+      <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+      <li class="nav-item"><a class="nav-link" href="#subjects">Subjects</a></li>
+      <li class="nav-item"><a class="nav-link" href="#timetable">Timetable</a></li>
+    </ul>
+  </div>
+</nav>
+
+<h2 class="text-center mt-3">🎓 Smart Classroom</h2>
+
+<!-- TIMETABLE (FIXED - FULL DISPLAY) -->
+<div class="section" id="timetable">
+<h3>📅 Class Timetable</h3>
+
+<table>
+<tr>
+<th>Day</th>
+<th>I</th><th>II</th>
+<th class="break">BREAK</th>
+<th>III</th><th>IV</th>
+<th class="lunch">LUNCH</th>
+<th>V</th><th>VI</th><th>VII</th>
+</tr>
+
+<tr>
+<td>Mon</td>
+<td>PPL</td><td>RES</td><td class="break"></td>
+<td>DW</td><td>OOSE</td><td class="lunch"></td>
+<td>NS</td><td colspan="2" class="lab">NS LAB</td>
+</tr>
+
+<tr>
+<td>Tue</td>
+<td>PPL</td><td>NS</td><td class="break"></td>
+<td>RES</td><td>OOSE</td><td class="lunch"></td>
+<td colspan="3" class="lab">MAD LAB</td>
+</tr>
+
+<tr>
+<td>Wed</td>
+<td>DW</td><td>YOGA</td><td class="break"></td>
+<td colspan="2" class="lab">DW LAB</td>
+<td class="lunch"></td>
+<td>PPL</td><td colspan="2" class="lab">OOSE LAB</td>
+</tr>
+
+<tr>
+<td>Thu</td>
+<td>NS</td><td>RES</td><td class="break"></td>
+<td>DW</td><td>PPL</td><td class="lunch"></td>
+<td>OOSE</td><td>RES</td><td>DW</td>
+</tr>
+
+<tr>
+<td>Fri</td>
+<td>RES</td><td>PPL</td><td class="break"></td>
+<td>DW</td><td>YOGA</td><td class="lunch"></td>
+<td colspan="3">NAAN MUDHALVAN</td>
+</tr>
+
+</table>
+</div>
+
+<!-- SUBJECTS -->
+<div class="section" id="subjects">
+<h3>📘 Subject Details</h3>
+
+<table>
+<tr><td>CCS358</td><td>PPL-Principles of Programming Language</td><td>Ms. Malathi</td></tr>
+<tr><td>CCS341</td><td>DW-Data Warehousing</td><td>Ms. Jayaprabha</td></tr>
+<tr><td>CCS354</td><td>NS-Network Security</td><td>Mrs. Parimalam</td></tr>
+<tr><td>OEE351</td><td>RES-Renewable Energy System</td><td>Mrs. Ramalakshmi</td></tr>
+<tr><td>MX3085</td><td>YOGA-Well Being With Traditional Practices-Yoga,Ayurveda and Siddha</td><td>Mrs. Saranya</td></tr>
+
+</table>
+</div>
+
+<!-- 🤖 AI CHATBOT BELOW SUBJECTS -->
+<div class="ai-section">
+<h3>🤖 AI Smart Assistant</h3>
+
+<div class="ai-box">
+
+<div id="aiChatArea"></div>
+
+<div class="ai-input">
+  <input type="text" id="question" placeholder="Ask about timetable, subjects..." />
+  <button onclick="askBot()">Send</button>
+  <button onclick="startVoice()">🎤</button>
+</div>
+
+</div>
+</div>
+
+<script>
+
+// ==========================
+// 💬 CHAT UI
+// ==========================
+function addMessage(text,type){
+  let div=document.createElement("div");
+  div.className="msg "+type;
+  div.innerText=text;
+  document.getElementById("aiChatArea").appendChild(div);
+  document.getElementById("aiChatArea").scrollTop = document.getElementById("aiChatArea").scrollHeight;
+}
+
+// ==========================
+// 🔊 VOICE OUTPUT (AI SPEAK)
+// ==========================
+function speak(text){
+  let speech=new SpeechSynthesisUtterance(text);
+  speech.lang="en-US";
+  speech.rate=1;
+  window.speechSynthesis.speak(speech);
+}
+
+// ==========================
+// 📅 FULL TIMETABLE (DAYWISE)
+// ==========================
+const timetable = {
+  monday: ["PPL", "RES", "DW", "OOSE", "NS", "NS LAB"],
+  tuesday: ["PPL", "NS", "RES", "OOSE", "MAD LAB"],
+  wednesday: ["DW LAB", "DW LAB", "PPL", "OOSE LAB"],
+  thursday: ["NS", "RES", "DW", "PPL", "OOSE", "RES", "DW"],
+  friday: ["RES", "PPL", "DW", "YOGA", "NAAN MUDHALVAN"]
+};
+
+// ==========================
+// 📘 SUBJECT DATA
+// ==========================
+const subjects = {
+  ppl: "PPL - Programming Language (Ms. Malathi)",
+  dw: "DW - Data Warehousing (Ms. Jayaprabha)",
+  ns: "NS - Network Security (Mrs. Parimalam)",
+  oose: "OOSE - Software Engineering (Mrs. Lavanya)",
+  res: "RES - Renewable Energy (Mrs. Ramalakshmi)",
+  yoga: "YOGA - Traditional Practices (Mrs. Saranya)"
+};
+
+// ==========================
+// 📅 GET DAY
+// ==========================
+function getToday(){
+  const d=["sunday","monday","tuesday","wednesday","thursday","friday","saturday"];
+  return d[new Date().getDay()];
+}
+
+// ==========================
+// 🤖 SMART AI LOGIC
+// ==========================
+function getBotResponse(q){
+
+  let day=getToday();
+
+  // GREETINGS
+  if(q.includes("hello") || q.includes("hi"))
+    return "Hello 👋 I'm here to assist you with your studies";
+
+  // TODAY
+  if(q.includes("today") || q.includes("schedule"))
+    return "Today ("+day.toUpperCase()+") classes: " + (timetable[day] || ["No classes"]);
+
+  // FULL WEEK
+  if(q.includes("week") || q.includes("full timetable"))
+    return "Week timetable available in the table above 📅";
+
+  // NEXT CLASS
+  if(q.includes("next"))
+    return "Your next class depends on current period. Check timetable ⏰";
+
+  // FREE PERIOD
+  if(q.includes("free"))
+    return "Free periods depend on schedule gaps in timetable 📘";
+
+  // LAB INFO
+  if(q.includes("lab"))
+    return "Labs are practical sessions like MAD LAB, DW LAB, OOSE LAB with extended hours";
+
+  // SUBJECT DETAILS
+  if(q.includes("ppl")) return subjects.ppl;
+  if(q.includes("dw")) return subjects.dw;
+  if(q.includes("ns")) return subjects.ns;
+  if(q.includes("oose")) return subjects.oose;
+  if(q.includes("res")) return subjects.res;
+  if(q.includes("yoga")) return subjects.yoga;
+
+  // STAFF INFO
+  if(q.includes("staff"))
+    return "Staff: Malathi, Jayaprabha, Parimalam, Lavanya, Ramalakshmi, Saranya";
+
+  return "Ask: today schedule, next class, subjects, labs, staff details 😊";
+}
+
+// ==========================
+// 💬 SEND MESSAGE
+// ==========================
+function askBot(){
+  let input=document.getElementById("question");
+  let q=input.value.toLowerCase().trim();
+  if(!q) return;
+
+  addMessage(q,"user");
+
+  let res=getBotResponse(q);
+
+  setTimeout(()=>{
+    addMessage(res,"bot");
+    speak(res); // 🔊 VOICE OUTPUT
+  },400);
+
+  input.value="";
+}
+
+// ==========================
+// 🎤 VOICE INPUT (SPEECH TO TEXT)
+// ==========================
+function startVoice(){
+  let recognition=new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+  recognition.lang="en-US";
+  recognition.start();
+
+  recognition.onresult=function(event){
+    let speech=event.results[0][0].transcript;
+    document.getElementById("question").value=speech;
+    askBot();
+  };
+}
+
+// ==========================
+// ⌨ ENTER KEY SUPPORT
+// ==========================
+document.addEventListener("keydown",function(e){
+  if(e.key==="Enter") askBot();
+});
+
+</script>
+</body>
+</html>
