@@ -1,0 +1,153 @@
+
+
+/* BODY */
+body {
+  background: #f4f6fb;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* HERO */
+.hero {
+  background: linear-gradient(135deg, #1a1a2e, #2e2a8f);
+  color: white;
+  text-align: center;
+  padding: 60px 20px 50px;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+}
+
+.hero h1 {
+  font-size: 42px;
+  font-weight: 700;
+}
+
+.hero p {
+  margin-top: 10px;
+  font-size: 16px;
+  opacity: 0.85;
+}
+
+/* SECTION CARD */
+.section-card {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  margin-bottom: 25px;
+}
+
+/* HIGHLIGHTS */
+.highlights {
+  background: linear-gradient(135deg, #4b0082, #2e2a8f);
+  padding: 25px;
+  border-radius: 15px;
+  color: white;
+}
+
+.highlight-card {
+  background: rgba(255,255,255,0.12);
+  border-radius: 12px;
+  padding: 20px;
+  height: 160px;
+}
+
+/* BUTTONS */
+.tabs button {
+  margin: 5px;
+  border-radius: 20px;
+  padding: 6px 15px;
+}
+
+/* UPDATES */
+.updates-title {
+  font-weight: 600;
+  border-bottom: 2px solid #2e2a8f;
+  display: inline-block;
+  padding-bottom: 5px;
+  margin-bottom: 20px;
+}
+
+.update-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background: #fff;
+  padding: 15px 18px;
+  border-radius: 10px;
+
+  margin-bottom: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+  transition: 0.2s;
+}
+
+.update-item:hover {
+  transform: translateY(-2px);
+}
+
+.update-content h6 {
+  margin: 0;
+  color: #2e2a8f;
+  font-weight: 600;
+}
+
+.update-content p {
+  margin: 3px 0 0;
+  color: #555;
+  font-size: 14px;
+}
+
+.update-date {
+  font-size: 13px;
+  color: #888;
+}
+
+/* FORM */
+form input, form textarea, form select {
+  border-radius: 10px;
+}
+
+button.btn-primary {
+  background: #2e2a8f;
+  border: none;
+}
+
+button.btn-primary:hover {
+  background: #1a1a6e;
+}
+
+
+
+/* NAVBAR */
+.navbar {
+  background: rgba(13,110,253,0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  position: fixed;   /* 🔥 makes it stay on top */
+  top: 0;
+  left: 0;
+  width: 100%;
+
+  z-index: 1000;     /* ensures it stays above everything */
+}
+
+/* NAV LINKS */
+.nav-link {
+  color: white !important;
+  font-weight: 600;
+  font-size: 18px;
+  margin: 0 10px;
+  letter-spacing: 0.3px;
+  transition: 0.3s;
+}
+
+.nav-link:hover {
+  color: #ddd !important;
+}
+
+
+
+body {
+  padding-top: 70px;
+}
