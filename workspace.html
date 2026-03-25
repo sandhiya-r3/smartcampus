@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Smart Classroom System</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="css/works.css">
+
+
+</head>
+
+<body>
+    <!-- 🔗 NAVBAR -->
+<nav class="navbar navbar-expand-lg fixed-top custom-navbar">
+  <div class="container">
+
+    <button class="navbar-toggler bg-light" data-bs-toggle="collapse" data-bs-target="#navMenu">☰</button>
+
+    <div class="collapse navbar-collapse justify-content-center" id="navMenu">
+      <ul class="navbar-nav">
+
+        <li class="nav-item"><a class="nav-link" href="home.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="sub2.html">Course Portal</a></li>
+        <li class="nav-item"><a class="nav-link" href="works.html">Workspace</a></li>
+        <li class="nav-item"><a class="nav-link" href="activity.html">Student Activity</a>
+        </li>
+
+        
+
+        <li class="nav-item">
+          <button class="toggle-btn" onclick="toggleDark()">🌙</button>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
+   
+<div class="header">🎓 Smart Classroom System</div>
+
+<div class="top-buttons">
+<button onclick="show('students')">Students Profiles</button>
+<button onclick="show('attendance')">Attendance Tracker</button>
+<button onclick="show('assignment')">Assignment</button>
+<button onclick="show('notice')">Announcements</button>
+<button onclick="show('complaint')">Complaints</button>
+<button onclick="show('mentor')">SafeTalk</button>
+</div>
+
+<!-- STUDENTS -->
+<div id="students" class="section active">
+<div class="card">
+
+<div class="info">
+<b>Student Information Management:</b><br>
+This module provides a centralized platform to maintain comprehensive student records, including register numbers, names, email IDs, and contact details. It ensures easy access, quick verification, and efficient communication between faculty and students, supporting smooth academic operations.
+</div>
+
+<input id="search" placeholder="Search..." onkeyup="filter()">
+
+<table>
+<tr><th>S.No</th><th>Reg No</th><th>Name</th><th>Email</th><th>Phone</th></tr>
+<tbody id="tbody"></tbody>
+</table>
+
+</div>
+</div>
+
+<!-- ATTENDANCE -->
+<div id="attendance" class="section">
+<div class="card">
+
+<div class="info">
+<b>Attendance Monitoring:</b><br>
+This module enables faculty to accurately record and manage student attendance for multiple subjects. It offers real-time updates and visual insights through charts, helping track student participation, improve discipline, and support academic performance analysis.
+</div>
+
+<select id="subject" onchange="loadAttendance()">
+<option>PPL</option><option>DW</option><option>Yoga</option>
+<option>RES</option><option>NS</option><option>OOSE</option>
+</select>
+
+<table id="att"></table>
+<canvas id="chart"></canvas>
+
+</div>
+</div>
+
+<!-- ASSIGNMENT -->
+<div id="assignment" class="section">
+<div class="card">
+
+<div class="info">
+<b>Assignment Submission:</b><br>
+This section allows students to submit assignments digitally, ensuring a paperless and organized workflow. Faculty can monitor submissions, track completion status, and maintain records for evaluation, improving efficiency and transparency in academic tasks.
+</div>
+
+<input placeholder="Student Name">
+<input type="file">
+<button class="btn" onclick="alist.innerHTML+='<li>Submitted ✔</li>'">Submit</button>
+<ul id="alist"></ul>
+
+</div>
+</div>
+
+<!-- NOTICE -->
+<div id="notice" class="section">
+<div class="card">
+
+<div class="info">
+<b>Notice Board:</b><br>
+This module serves as an official communication channel where faculty can post important notices, academic updates, and event information. It ensures students stay informed and aligned with institutional schedules and activities in a timely manner.
+</div>
+
+<input id="ntitle" placeholder="Title">
+<textarea id="nmsg"></textarea>
+<button class="btn" onclick="nlist.innerHTML+=`<div class='notice'><b>${ntitle.value}</b><br>${nmsg.value}</div>`">Post</button>
+<div id="nlist"></div>
+
+</div>
+</div>
+
+<!-- COMPLAINT -->
+<div id="complaint" class="section">
+<div class="card">
+
+<div class="info">
+<b>Complaint System:</b><br>
+This module provides students with a structured platform to report academic or campus-related issues. It helps faculty and administration identify problems, take corrective actions, and improve the overall campus environment and student experience.
+</div>
+
+<input id="cname" placeholder="Name">
+<textarea id="cmsg"></textarea>
+<button class="btn" onclick="clist.innerHTML+=`<p>${cname.value}: ${cmsg.value}</p>`">Submit</button>
+<div id="clist"></div>
+
+</div>
+</div>
+
+
+<!-- MENTOR -->
+<div id="mentor" class="section">
+<div class="card">
+
+<div class="info">
+<b>Mentor Interaction:</b><br>
+Our college conducts regular mentor–mentee sessions to support student well-being and academic growth. However, in group environments, some concerns may be difficult to express openly.
+<br>
+<b>SafeTalk</b> is your personal space to express anything freely — whether it's academic stress, personal issues, or suggestions<br><br>
+💬 Share without fear<br>
+🔒 Stay completely anonymous<br>
+❤️ Get the support you deserve
+</div>
+
+<input id="mname" placeholder="Name">
+<textarea id="mmsg"></textarea>
+<button class="btn" onclick="mlist.innerHTML+=`<p>${mname.value}: ${mmsg.value}</p>`">Send</button>
+<div id="mlist"></div>
+
+</div>
+</div>
+
+<script>
+
+// NAV
+function show(id){
+document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+document.getElementById(id).classList.add('active');
+}
+
+// STUDENT DATA
+let studentData = [
+{reg:"912623205001",name:"AAFRIN S",email:"aafrin3132006@gmail.com",phone:"9345696642"},
+{reg:"912623205002",name:"AARIFA RAHMATH H",email:"aarifaidol6@gmail.com",phone:"9087332031"},
+{reg:"912623205003",name:"ABINAYA ESWARI S",email:"abinayaeswarisenthilkumar@gmail.com",phone:"9661291772"},
+{reg:"912623205004",name:"ABIRAMI N",email:"abirami8852@gmail.com",phone:"6369809195"},
+{reg:"912623205005",name:"ANJALI A",email:"tamildurai1208@gmail.com",phone:"9042998519"},
+{reg:"912623205006",name:"ARUPA V",email:"arupaviswa21@gmail.com",phone:"9626160403"},
+{reg:"912623205007",name:"ASHIKA SHIFANA K",email:"shifanak807@gmail.com",phone:"7397016060"},
+{reg:"912623205008",name:"BHARATHI G",email:"bharathithangabalu6@gmail.com",phone:"8220781595"},
+{reg:"912623205009",name:"DIVYADHARSHINI S",email:"divya009@gmail.com",phone:"7418337769"},
+{reg:"912623205010",name:"HARINI N",email:"narayananharini27@gmail.com",phone:"7604989414"},
+{reg:"912623205011",name:"INDUMATHI S",email:"indhumati2006@gmail.com",phone:"9787307943"},
+{reg:"912623205012",name:"JENADHULPIRTHOS K",email:"jenadhul13@gmail.com",phone:"9952585181"},
+{reg:"912623205013",name:"JOSIKA T",email:"josika013@gmail.com",phone:"6374441406"},
+{reg:"912623205014",name:"KANISHKA S",email:"kanishkakani1006@gmail.com",phone:"9123585849"},
+{reg:"912623205015",name:"KAVIYA N",email:"kaviya015@gmail.com",phone:"9000000015"},
+{reg:"912623205017",name:"KIRUBHASHREE J",email:"kirubhs22abi2005@gmail.com",phone:"7845299556"},
+{reg:"912623205018",name:"LAVAN SRI A",email:"lavansri63@gmail.com",phone:"8098704563"},
+{reg:"912623205019",name:"LAVANYA P",email:"lavanya019@gmail.com",phone:"9000000019"},
+{reg:"912623205020",name:"MAHALAKSHMI S",email:"maha020@gmail.com",phone:"9000000020"},
+{reg:"912623205021",name:"MARIYA LEDIYA S",email:"smariyalediya14@gmail.com",phone:"8778183231"},
+{reg:"912623205022",name:"MONISHA S",email:"monisha022@gmail.com",phone:"9000000022"},
+{reg:"912623205023",name:"NASREENBEHAM B",email:"nasreenbeham4@gmail.com",phone:"6381903476"},
+{reg:"912623205024",name:"NISHA R",email:"nisharavi296@gmail.com",phone:"9943469297"},
+{reg:"912623205025",name:"NITHYA SRI M",email:"nithya025@gmail.com",phone:"9361776761"},
+{reg:"912623205026",name:"POORANIDARSHINI K",email:"poorani026@gmail.com",phone:"6383171283"},
+{reg:"912623205027",name:"PRAVENA P",email:"praveenapuvi@gmail.com",phone:"7845424434"},
+{reg:"912623205028",name:"PRITHIKA A",email:"prithika028@gmail.com",phone:"9384724690"},
+{reg:"912623205029",name:"PRIYADHARSINI M",email:"priyadharsinimuthu2003@gmail.com",phone:"8526628246"},
+{reg:"912623205030",name:"PRIYAGAJALAKSHMI R",email:"gajalakshmi030@gmail.com",phone:"9344981703"},
+{reg:"912623205031",name:"RASNIKA R",email:"rasnika031@gmail.com",phone:"8883184676"},
+{reg:"912623205032",name:"RITHIKA J",email:"rithikaj2392005@gmail.com",phone:"8438584877"},
+{reg:"912623205033",name:"SABITHA S",email:"sabithasiva2005@gmail.com",phone:"6383720639"},
+{reg:"912623205034",name:"SANDHIYA R",email:"sandybora08@gmail.com",phone:"9965018008"},
+{reg:"912623205035",name:"SARGUNA M",email:"sargunasarguna132@gmail.com",phone:"9952779110"},
+{reg:"912623205036",name:"SHAFRIN BEGAM N",email:"begamshafrin@gmail.com",phone:"8056912511"},
+{reg:"912623205037",name:"VINITHA P",email:"pvinitha322@gmail.com",phone:"9342424066"},
+{reg:"912623205038",name:"YOGESWARI R",email:"yogeswari038@gmail.com",phone:"9000000038"}
+];
+
+// LOAD TABLE
+let tbody=document.getElementById("tbody");
+studentData.forEach((s,i)=>{
+tbody.innerHTML+=`<tr>
+<td>${i+1}</td><td>${s.reg}</td><td>${s.name}</td>
+<td>${s.email}</td><td>${s.phone}</td>
+</tr>`;
+});
+
+// SEARCH
+function filter(){
+let v=document.getElementById("search").value.toLowerCase();
+document.querySelectorAll("#tbody tr").forEach(r=>{
+r.style.display=r.innerText.toLowerCase().includes(v)?"":"none";
+});
+}
+
+// ATTENDANCE
+let subjects=["PPL","DW","Yoga","RES","NS","OOSE"];
+let data={}; subjects.forEach(s=>data[s]={});
+
+function loadAttendance(){
+let sub=document.getElementById("subject").value;
+let table=document.getElementById("att");
+
+table.innerHTML="<tr><th>Name</th><th>✔</th><th>✖</th><th>Status</th></tr>";
+
+studentData.forEach(s=>{
+table.innerHTML+=`<tr>
+<td>${s.name}</td>
+<td><button onclick="mark(this,'p','${s.name}')">✔</button></td>
+<td><button onclick="mark(this,'a','${s.name}')">✖</button></td>
+<td class="status">${data[sub][s.name]||'-'}</td>
+</tr>`;
+});
+}
+
+function mark(btn,type,name){
+let sub=document.getElementById("subject").value;
+data[sub][name]=type==='p'?"Present":"Absent";
+
+let row=btn.parentElement.parentElement;
+row.querySelector(".status").innerHTML=
+type==='p'?"<span class='present'>Present</span>":"<span class='absent'>Absent</span>";
+
+updateChart();
+}
+
+// CHART
+let chart=new Chart(document.getElementById("chart"),{
+type:'bar',
+data:{labels:subjects,datasets:[{label:'Present Count',data:[0,0,0,0,0,0],backgroundColor:'#1976d2'}]}
+});
+
+function updateChart(){
+chart.data.datasets[0].data=subjects.map(s=>Object.values(data[s]).filter(v=>v==="Present").length);
+chart.update();
+}
+
+// INITIAL LOAD
+loadAttendance();
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+</body>
+</html>
