@@ -1,0 +1,62 @@
+body
+{
+  font-family:'Poppins';margin:0;background:#f4f6f9;
+}
+.header
+     {
+      text-align:center;padding:20px;background:#0f2027;color:white;font-size:24px;
+    }
+.top-buttons{
+  text-align:center;
+  background:white;
+  padding: 40px;
+
+  display:flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.nav button{margin:5px;padding:8px 15px;border:none;background:#1976d2;color:white;border-radius:5px;cursor:pointer;}
+.section{display:none;}
+.section.active{display:block;}
+.card{width:90%;margin:20px auto;background:white;padding:20px;border-radius:10px;}
+.info{background:#e3f2fd;padding:15px;border-left:5px solid #1976d2;margin-bottom:15px;}
+table{width:100%;border-collapse:collapse;}
+th{background:#1976d2;color:white;padding:10px;}
+td{padding:8px;text-align:center;border-bottom:1px solid #ddd;}
+input,textarea,select{width:100%;padding:8px;margin:5px;border:1px solid #ccc;border-radius:5px;}
+.btn{background:#1976d2;color:white;border:none;padding:8px;cursor:pointer;}
+.present{color:green;font-weight:bold;}
+.absent{color:red;font-weight:bold;}
+.notice{background:#f1f8ff;padding:10px;margin:5px;border-left:5px solid #1976d2;}
+
+
+/* NAVBAR */
+.custom-navbar {
+  background: rgba(13,110,253,0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  
+    
+}
+
+/* NAV LINKS */
+.nav-link {
+  color: white !important;
+  font-weight: 500;
+  font-size: 18px;
+  margin: 0 10px;
+  letter-spacing: 0.1px;
+  transition: 0.3s;
+}
+
+.nav-link:hover {
+  color: #ddd !important;
+}
+
+
+
+body {
+  padding-top: 60px;
+}
